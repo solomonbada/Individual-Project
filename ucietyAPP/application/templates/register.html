@@ -1,6 +1,7 @@
 {% extends "layout.html" %}
 {% block body_content %}
-	<h1>UCIETY Register Page</h1>
+<div style="background:transparent !important" class="jumbotron text-center">
+	<h1 class="text-primary" style="font-size:40px">UCIETY Register</h1>
 	<p>Need An Account? Sign Up Today!</p>
 	<div class="form">
 		<form method="POST" action="">
@@ -17,7 +18,7 @@
 				{% else %}
 					{{ form.first_name }}
 				{% endif %}
-			</div><br>
+			</div>
 			<div class="form-group">
 			{{ form.last_name.label }}
 				{% if form.last_name.errors %}
@@ -69,7 +70,7 @@
 				{% else %}
 					{{ form.email }}
 				{% endif %}
-			</div><br>
+			</div>
 			<div class="form-group">
 			{{ form.password.label }}
 				{% if form.password.errors %}
@@ -82,7 +83,7 @@
 				{% else %}
 					{{ form.password }}
 				{% endif %}
-			</div><br>
+			</div>
 			<div class="form-group">
 			{{ form.confirm_password.label }}
 				{% if form.confirm_password.errors %}
@@ -95,10 +96,11 @@
 				{% else %}
 					{{ form.confirm_password }}
 				{% endif %}
-			</div><br>
+			</div>
 			<div class="form-group">
 				{{ form.submit }}
 			</div><br>
 		</form>
 	</div>
+</div>
 {% endblock body_content %}

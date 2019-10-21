@@ -1,12 +1,30 @@
 {% extends "layout.html" %}
 {% block body_content %}
+<div style="background:transparent !important" class="jumbotron text-center">
+	<div class="container">
+	  <h2 class="text-primary" style="text-align: center; font-size:40px">{{ current_user.uni_name }} Societies</h2>
+	  <p style="text-align: center">Presented below are all societies at {{ current_user.uni_name }}</p>            
 
-	<h1>{{ current_user.uni_name }} Societies</h1>
-	{% for society in societies %}
-	<b>{{ society.SocietyName }}
-	<form action="{{ url_for('more', society_id=society.id) }}">
-		<input type="submit" value="More Info">
-	</form>
-	<br><br>
-	{% endfor %}
+	  <table class="table table-hover ">
+	    <thead>
+	      <tr>
+	  
+	        <th>Society Name</th>
+	        <th>About</th>
+	      </tr>
+	    </thead>
+	    <tbody>
+	      <tr>
+	      	{% for society in societies %}
+	        <td>{{ society.SocietyName }}</td>
+	        <td><form action="{{ url_for('more', society_id=society.id) }}" style="display: inline">
+			<input type="submit" value="More Info"></form></td>
+	      </tr>
+	    </tbody>
+	    {% endfor %}
+	  </table>
+	</div>
+</div>
 {% endblock body_content %}
+
+<h1 class="text-primary" style="font-size:90px">UCIETY</h1>

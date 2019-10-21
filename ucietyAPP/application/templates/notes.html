@@ -1,13 +1,15 @@
 {% extends "layout.html" %}
 {% block body_content %}
-<h1>Create A New Note</h1>
+<div style="background:transparent !important" class="jumbotron text-center">
+	<h1 class="text-primary" style="font-size:40px">Create A New Note</h1>
+	<br>
 <div class="form">
 	<form method="POST" action="">
 		{{ form.hidden_tag() }}
-		{{ form.title.label }}
+		<div style="font-size:30px"><b>{{ form.title.label }}</b></div>
 		{{ form.title }}
-		<br>
-		{{ form.content.label }}
+		<br><br>
+		<div style="font-size:30px"><b>{{ form.content.label }}</b></div>
 		{{ form.content }}
 		<br><br>
 		{{ form.submit }}
