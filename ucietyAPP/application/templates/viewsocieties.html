@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+{% block body_content %}
+
+	<h1>{{ current_user.uni_name }} Societies</h1>
+	{% for society in societies %}
+	<b>{{ society.SocietyName }}
+	<form action="{{ url_for('more', society_id=society.id) }}">
+		<input type="submit" value="More Info">
+	</form>
+	<br><br>
+	{% endfor %}
+{% endblock body_content %}

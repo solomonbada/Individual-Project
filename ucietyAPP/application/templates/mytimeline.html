@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+{% block body_content %}
+<article class="media content-section">
+	<h1>My Timeline</h1>
+	<p>This page will display all your relevant notes made</p><br>
+	<div>
+{% for note in notes %}
+	<div class="form">
+		<h2>{{ note.title }}</h2>
+		<span>by <i><b>{{ note.mine.first_name }} {{ note.mine.last_name }}</b></i></span>
+		<span>on the <i>{{ note.date_posted }}</i></span>
+		<p><b> Note:</b> {{ note.content }}</p>
+		<form action="{{ url_for('delete_post', note_id=note.id) }}" method="POST">
+			<input type="submit" value="Delete Note">
+	</form>
+	</div>
+</article>
+{% endfor %}
+{% endblock body_content %}
