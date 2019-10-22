@@ -8,22 +8,16 @@
 	<div class="container mt-5 mb-5 border border-primary rounded">
 		<br>
 		<div class="row">
-			<div class="col-md-6 offset-md-3">
-				<h4><b>Title: {{ note.title }}</b></h4>
+			<div class="container">
+				<h4><b>Title: </b>{{ note.title }}</h4>
 				<ul class="timeline">
-					
-						<p>Created On: <b>{{ note.date_posted }}</b> by <b>{{ note.mine.first_name }} {{ note.mine.last_name }}</b></p>
-						<p><b>Content: </b>{{ note.content }}</p>
+						<b>Content: </b>{{ note.content }}<footer class="blockquote-footer"> by {{ note.mine.first_name }} {{ note.mine.last_name }} on <cite>{{ note.date_posted }}</cite></footer>
 						<form action="{{ url_for('delete_post', note_id=note.id) }}" method="POST">
-						<input type="submit" value="Delete Note">
-					
+						<input type="submit" value="Delete Note"></form>
 				</ul>
 			</div>
 		</div>
 	</div>
-
 	{% endfor %}
-
-
-
+</div>
 {% endblock body_content %}
