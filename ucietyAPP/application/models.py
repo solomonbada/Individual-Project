@@ -13,7 +13,7 @@ class Notes(db.Model, UserMixin):
 	date_posted = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
 	user_id = db.Column(db.Integer, db.ForeignKey('student_users.id'), nullable=False)
 
-	def __repr__(self):
+	def __repr__(self): #hidden method that returns a printable representation of an object
 		return ''.join(['User ID : ', self.user_id, '\r\n' 'Title: ', self.title, '\r\n', self.content])
 
 '''database model for the table 'StudentUsers', uni_id, soc_id are the foreign keys which links
@@ -30,7 +30,7 @@ class StudentUsers(db.Model, UserMixin):
 	soc_name = db.Column(db.String(50), nullable=True)
 	note = db.relationship('Notes', backref='mine', lazy=True)
 
-	def __repr__(self):
+	def __repr__(self): #hidden method that returns a printable representation of an object
 		return ''.join(['User ID: ', str(self.id), '\r\n', 
 			'Email: ', self.email, '\r\n',
 			'Name: ', self.first_name, '', self.last_name, '\r\n', 'University: ', self.uni_name])
@@ -43,7 +43,7 @@ class University(db.Model):
 	uni = db.relationship('StudentUsers', backref='user', lazy=True)
 	uni_s = db.relationship('Society', backref='author', lazy=True)
 	
-	def __repr__(self):
+	def __repr__(self): #hidden method that returns a printable representation of an object
 		return ''.join(['Uni_ID: ', str(self.id), '\r\n',
 			'UNI: ', self.uni_name])
 
@@ -55,7 +55,7 @@ class Society(db.Model):
 	uni_id = db.Column(db.Integer, db.ForeignKey('university.id'), nullable=False)
 	soc = db.relationship('StudentUsers', backref='creator', lazy=True)
 
-	def __repr__(self):
+	def __repr__(self): #hidden method that returns a printable representation of an object
 		return ''.join(['UNI ID: ', str(self.id)])
 
 @login_manager.user_loader ######

@@ -23,10 +23,12 @@ def about():
 #url route that directs the user to the register page
 @app.route('/register', methods=['GET', 'POST'])
 def register(): 
+	if current_user.is_authenticated:
+		return redirect(url_for('mytimeline'))	
 	form = StudentRegistrationForm() #Grabs the StudentRegistration form from applications.forms.py
 	if form.validate_on_submit(): ####
 		hashed_password = bcrypt.generate_password_hash(form.password.data) #Generates a hashed form of the password within the database
-		user = StudentUsers(first_name=form.first_name.data, last_name=form.last_name.data, uni_id=form.uni_id.data, uni_name=form.uni_name.data, email=form.email.data, password=hashed_password)
+		user = StudentUsers(first_name=form.first_name.data.capitalize(), last_name=form.last_name.data.capitalize(), uni_id=form.uni_id.data, uni_name=form.uni_name.data, email=form.email.data, password=hashed_password)
 		db.session.add(user)
 		db.session.commit() #adds all the information submitted by the user to the database to be stored
 		return redirect(url_for('login')) #after registration, the user is redirected to the login page
@@ -63,8 +65,8 @@ def mytimeline():
 def account():
 	form = UpdateAccountForm() #within the function, the form that is to be used is the UpdateAccountForm
 	if form.validate_on_submit(): #following block of code allows the user to enter new details to be updated
-		current_user.first_name = form.first_name.data
-		current_user.last_name = form.last_name.data
+		current_user.first_name = form.first_name.data.capitalize()
+		current_user.last_name = form.last_name.data.capitalize()
 		current_user.email = form.email.data
 		current_user.soc_name = form.SocietyName.data
 		db.session.commit() #commits and saves the changes to the database
@@ -79,7 +81,6 @@ def account():
 			temp = [lists[i].SocietyName, lists[i].SocietyName] 
 			names.append(temp) #This method adds a the previous item (name) to the existing list of society names
 		form.SocietyName.choices=names
-
 	return render_template('account.html', title='Account', form=form, creator=current_user)
 
 #url route that directs the user to the 'viewsocieties' page
@@ -92,12 +93,14 @@ def viewsocieties():
 
 #url route that directs the the user to view more about the society
 @app.route('/viewsocieties/<int(min=1):society_id>')
+@login_required
 def more(society_id):
 	society1 = Society.query.filter_by(id=society_id).first() #queries the society table and filters by the society
 	return render_template('more.html', title='More Info', society=society1)
 
 #url route that directs the user to the notes page
 @app.route('/notes', methods=['GET', 'POST'])
+@login_required
 def note():
 	form = NotesForm() #within the function, the form that is to be used is the NotesForm
 	if form.validate_on_submit():

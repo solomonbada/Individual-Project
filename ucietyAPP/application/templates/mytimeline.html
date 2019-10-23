@@ -11,9 +11,9 @@
 			<div class="container">
 				<h4><b>Title: </b>{{ note.title }}</h4>
 				<ul class="timeline">
-						<b>Content: </b>{{ note.content }}<footer class="blockquote-footer"> by {{ note.mine.first_name }} {{ note.mine.last_name }} on <cite>{{ note.date_posted }}</cite></footer>
+						<b>Content: </b>{{ note.content }}<footer class="blockquote-footer"> by {{ note.mine.first_name }} {{ note.mine.last_name }} on <cite>{{ note.date_posted }}</cite></footer><br>
 						<form action="{{ url_for('delete_post', note_id=note.id) }}" method="POST">
-						<input type="submit" value="Delete Note"></form>
+						<input type="submit" value="Delete Note" button type="button"  class="btn btn-danger btn-sm"></form>
 				</ul>
 			</div>
 		</div>

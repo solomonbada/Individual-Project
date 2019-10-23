@@ -7,12 +7,33 @@
 	<form method="POST" action="">
 		{{ form.hidden_tag() }}
 		<div style="font-size:30px"><b>{{ form.title.label }}</b></div>
-		{{ form.title }}
-		<br><br>
+		{% if form.title.errors %}
+			{{ form.title }}
+			<div class="error">
+				{% for error in form.title.errors %}
+					<span class="text-danger">{{ error }}</span>
+				{% endfor %}
+			</div>
+			{% else %}
+				{{ form.title }}
+			{% endif %}
+		<br>
 		<div style="font-size:30px"><b>{{ form.content.label }}</b></div>
-		{{ form.content }}
+		{% if form.content.errors %}
+			{{ form.content }}
+			<div class="error">
+				{% for error in form.content.errors %}
+					<span class="text-danger">{{ error }}</span>
+				{% endfor %}
+			</div>
+			{% else %}
+				{{ form.content }}
+			{% endif %}
 		<br><br>
-		{{ form.submit }}
+		<form action="{{ url_for('note') }}" method="POST">
+						<input type="submit" value="Post Note" button type="button"  class="btn btn-primary btn-sm"></form>
 	</form>
 
 {% endblock body_content %}
+
+

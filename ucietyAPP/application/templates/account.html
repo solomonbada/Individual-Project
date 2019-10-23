@@ -5,7 +5,8 @@
 		<div class="form">
 			<form method="POST" action="">
 				<h1>MY ACCOUNT DETAILS</h1>
-				<h3><b>Name:</b> {{ current_user.first_name }} {{ current_user.last_name }} </h3>
+				<h3><b>Name:</b> {{ current_user.first_name }} {{ current_user.last_name }}</h3>
+				<h3><b>Email:</b> {{ current_user.email }}
 				<h3><b>University:</b> {{ current_user.uni_name }} </h3>
 				<h3><b>Joined Society:</b> {{ current_user.soc_name }} </h3>
 			</form>
@@ -70,7 +71,8 @@
 					{% endif %}</p>
 				</div>
 				<div class="form-group">
-					{{ form.submit }}
+					<form action="{{ url_for('account') }}" method="POST">
+						<input type="submit" value="Update" button type="button"  class="btn btn-success"></form>
 				</div>
 			</form>
 		</div>
