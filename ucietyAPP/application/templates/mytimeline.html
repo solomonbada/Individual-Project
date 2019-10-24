@@ -1,19 +1,23 @@
 {% extends "layout.html" %}
 {% block body_content %}
-<article class="media content-section">
-	<h1>My Timeline</h1>
-	<p>This page will display all your relevant notes made</p><br>
-	<div>
+<div style="background:transparent !important" class="jumbotron text-center">
+<h1 class="text-primary" style="text-align: center; font-size:40px">My Timeline</h1>        
+<p>This page will display all your relevant notes made</p>
+
 {% for note in notes %}
-	<div class="form">
-		<h2>{{ note.title }}</h2>
-		<span>by <i><b>{{ note.mine.first_name }} {{ note.mine.last_name }}</b></i></span>
-		<span>on the <i>{{ note.date_posted }}</i></span>
-		<p><b> Note:</b> {{ note.content }}</p>
-		<form action="{{ url_for('delete_post', note_id=note.id) }}" method="POST">
-			<input type="submit" value="Delete Note">
-	</form>
+	<div class="container mt-5 mb-5 border border-primary rounded">
+		<br>
+		<div class="row">
+			<div class="container">
+				<h4><b>Title: </b>{{ note.title }}</h4>
+				<ul class="timeline">
+						<b>Content: </b>{{ note.content }}<footer class="blockquote-footer"> by {{ note.mine.first_name }} {{ note.mine.last_name }} on <cite>{{ note.date_posted }}</cite></footer><br>
+						<form action="{{ url_for('delete_post', note_id=note.id) }}" method="POST">
+						<input type="submit" value="Delete Note" button type="button"  class="btn btn-danger btn-sm"></form>
+				</ul>
+			</div>
+		</div>
 	</div>
-</article>
-{% endfor %}
+	{% endfor %}
+</div>
 {% endblock body_content %}
