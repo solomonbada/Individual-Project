@@ -21,7 +21,7 @@ sudo apt-get update sudo pip3 install virtualenv cd Stylist sudo cp flask-app.se
 install the application files
 install_dir=/opt/flask-app sudo rm -rf ${install_dir} sudo mkdir ${install_dir} sudo cp -r ./* ${install_dir} sudo chown -R pythonadm:pythonadm ${install_dir}
 
-configure python virtual environment and install dependencies
+# configure python virtual environment and install dependencies
 sudo su - pythonadm << EOF cd ${install_dir} virtualenv -p python3 venv source venv/bin/activate sudo apt-get update sudo apt-get install python3 -y sudo apt-get install python3-pip -y chmod 777 requirements.txt pip3 install -r requirements.txt EOF
 
 sudo systemctl start flask-app
