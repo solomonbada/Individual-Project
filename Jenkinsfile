@@ -20,7 +20,7 @@ pipeline {
                         stage('--run--'){
                                 steps{
                                                                 
-                                        sh "sudo docker run -d -p 5000:5000 webapp"
+                                        sh "sudo docker run -d -p 5000:5000 --name webapp webapp"
                                  
                                 }
                         }
